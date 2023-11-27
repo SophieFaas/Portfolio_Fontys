@@ -1,0 +1,124 @@
+body{
+    background-color: grey;
+}
+.lavaLamp::before{
+    content: '';
+    position: absolute;
+    width: 16vh; /* Aangepaste breedte */
+    height: 7vh; /* Aangepaste hoogte */
+    bottom: -1vh;
+    left: 0;
+    border-radius: 100%;
+    background-color: rgba(0,0,0,.8);
+    filter: blur(2vh);
+    transform: scaleY(.3);
+    transform-origin: bottom;
+}
+.lavaLamp::after{
+    content: '';
+    position: absolute;
+    width: 80%; /* Aangepaste breedte */
+    height: 80%; /* Aangepaste hoogte */
+    top: 0;
+    left: 0;
+    /*background: linear-gradient(-90deg, rgba(255,255,255,0), rgba(255,255,255,.3) 8%, rgba(255,255,255,0), rgba(255,255,255,.4) 100%);
+    border-radius: 10vh 10vh 5vh 5vh;*/
+}
+.lavaLamp{
+    position: absolute;
+    width: 11vh; /* Aangepaste breedte */
+    height: 30vh; /* Aangepaste hoogte */
+    top: 50%;
+    left: 50%;
+    margin-top: -15vh; /* Aangepast om het midden van de lavalamp te behouden */
+    margin-left: -5.5vh; /* Aangepast om het midden van de lavalamp te behouden */
+    background-color: #1a1a1a;
+    border-radius: 10vh 10vh 5vh 5vh;
+    box-shadow: 0 0 0 rgba(255,255,255,0);
+    transform: scaleX(1) scaleY(1);
+    transform-origin: bottom;
+    transition: all 300ms ease-in-out 0s;
+    animation-name: lavaJump;
+    animation-duration: 800ms;
+    animation-play-state: paused;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+}
+.lavaLamp:hover{
+    box-shadow: 0 0 10vh rgba(255,255,255,1);
+    transition: all 300ms ease-in-out 0s;
+}
+.lavaDiv{
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    top: 26%;
+    left: 0;
+    background-color: #74279d;
+    overflow: hidden;
+}
+.lavaDiv .innerLava{
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background-color: #74279d;
+    filter: blur(.2vh) contrast(100%) brightness(1500%) hue-rotate(30deg);
+    transition: all 500ms ease-in-out 0s;
+    image-rendering: crisp-edges;
+}
+.innerLava .innerLava{
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    filter: blur(2vh) contrast(500%) brightness(15000%);
+}
+.lavaDiv .floorDiv, .lavaDiv .ceilDiv{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: #900101;
+}
+.lavaDiv .ceilDiv{
+    top: 70%;
+}
+.lavaDiv .bubbleDiv{
+    position: absolute;
+    top: 100%;
+    left: 30%;
+    width: 15%;
+    height: 15%;
+    border-radius: 100%;
+    background-color: #900101;
+    animation-name: bubbleAnim;
+    animation-duration: 6000ms;
+    animation-play-state: running;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+}
+.lavaDiv div:nth-of-type(4){
+    animation-delay: 1000ms;
+    left: 50%;
+}
+.lavaDiv div:nth-of-type(5){
+    animation-delay: 2000ms;
+    width: 20%;
+    height: 20%;
+}
+@keyframes bubbleAnim{
+    0%{top: 80%;}
+    100%{top: -20%;}
+}
+@keyframes lavaJump{
+    0%{transform: scaleX(1) scaleY(1);}
+    20%{transform: scaleX(1.03) scaleY(.96);}
+    40%{transform: scaleX(.9) scaleY(1.08);}
+    60%{transform: scaleX(1.05) scaleY(.94);}
+    85%{transform: scaleX(.96) scaleY(1.03);}
+    100%{transform: scaleX(1) scaleY(1);}
+}

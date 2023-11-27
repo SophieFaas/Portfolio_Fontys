@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Animatie bal p5.js</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+<script>
+    let x1, y1; // Coördinaten van de eerste bal
+    let x2, y2; // Coördinaten van de tweede bal
+    let xspeed1, yspeed1; // Snelheden van de eerste bal
+    let xspeed2, yspeed2; // Snelheden van de tweede bal
+    let diameter = 50; // Diameter van de ballen
+    let kleur1, kleur2;
+
+    function setup() {
+        createCanvas(400, 400);
+        x1 = width / 3;
+        y1 = height / 2;
+        x2 = (2 * width) / 3;
+        y2 = height / 2;
+        xspeed1 = random(1, 3);
+        yspeed1 = random(1, 3);
+        xspeed2 = random(1, 3);
+        yspeed2 = random(1, 3);
+        kleur1 = color(255, 105, 180); // Roze kleur
+        kleur2 = color(255, 165, 0); // Oranje kleur
+    }
+
+    function draw() {
+        background(220);
+
+        // Beweeg de eerste bal
+        x1 = x1 + xspeed1;
+        y1 = y1 + yspeed1;
+
+        // Controleer de randen van het canvas voor de eerste bal
+        if (x1 > width - diameter / 2 || x1 < diameter / 2) {
+            xspeed1 = -xspeed1;
+        }
+        if (y1 > height - diameter / 2 || y1 < diameter / 2) {
+            yspeed1 = -yspeed1;
+        }
+
+        // Beweeg de tweede bal
+        x2 = x2 + xspeed2;
+        y2 = y2 + yspeed2;
+
+        // Controleer de randen van het canvas voor de tweede bal
+        if (x2 > width - diameter / 2 || x2 < diameter / 2) {
+            xspeed2 = -xspeed2;
+        }
+        if (y2 > height - diameter / 2 || y2 < diameter / 2) {
+            yspeed2 = -yspeed2;
+        }
+
+        // Controleer of de ballen elkaar overlappen
+        let afstand = dist(x1, y1, x2, y2);
+        let minimaleAfstand = diameter / 2;
+        if (afstand < minimaleAfstand) {
+            // Als de ballen elkaar overlappen, keer de bewegingsrichting om
+            let overlap = minimaleAfstand - afstand;
+            let richtingX = (x2 - x1) / afstand;
+            let richtingY = (y2 - y1) / afstand;
+            x1 -= overlap * richtingX;
+            y1 -= overlap * richtingY;
+            x2 += overlap * richtingX;
+            y2 += overlap * richtingY;
+        }
+
+        // Teken de eerste bal met roze opvulling en blauwe rand
+        fill(kleur1); // Roze opvulling
+        stroke(0, 0, 255); // Blauwe lijnkleur
+        strokeWeight(2); // Dikte van de lijn
+        ellipse(x1, y1, diameter);
+
+        // Teken de tweede bal met oranje opvulling en rode rand
+        fill(kleur2); // Oranje opvulling
+        stroke(255, 0, 0); // Rode lijnkleur
+        ellipse(x2, y2, diameter);
+    }
+</script>
+</body>
+</html>
